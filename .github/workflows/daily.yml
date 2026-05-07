@@ -1,1 +1,19 @@
+name: 股票简报推送
+
+on:
+  schedule:
+    # 每天8:30 UTC+8 = 16:30 CST
+    - cron: '30 8 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install requests
+      - run: python push_mini.py
 
